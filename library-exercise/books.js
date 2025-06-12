@@ -47,6 +47,7 @@ function displayBooks(bookList) {
         // document.getElementById('book-title').innerHTML = Book_Obj.title;
         // document.getElementById('book-author').innerHTML = Book_Obj.author;
         // document.getElementById('book-read').innerHTML = Book_Obj.isRead; bad practice
+        bookList.pop(Book_Obj)
     })
 }
 
