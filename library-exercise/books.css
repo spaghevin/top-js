@@ -28,10 +28,12 @@ body {
     border-radius: 6px;
     margin:24px;
     text-align: center;
-    padding: 24px;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    /* padding: 24px; */
+    /* padding-top: 48px;
+    padding-bottom: 48px; */
     background-color: #fae2b9;
+    width: 100px;
+    
 }
 
 #wrapper {
@@ -46,6 +48,7 @@ body {
     min-width: max-content;
     margin-left: 20px;
     margin-right: 120px;
+    display: flex; /* how to make it so that it wraps arround ?*/
 }
 
 #entry_form {
@@ -61,4 +64,16 @@ body {
 
 #line_across {
     color: #674100;
+}
+
+.book_remove {
+    background-color: transparent;
+    color: red;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.book_remove:hover {
+    transform: scale(1.2);
 }

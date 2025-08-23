@@ -1,7 +1,7 @@
 //Currently working on the book example on https://www.theodinproject.com/lessons/node-path-javascript-objects-and-object-constructors
 // Next step is the first project, and also installing node to run the code locally
 
-// TODO: How to get the array to refresh the doctree everytime and remove what is currently already there. Also maybe a button on each book to convert it to on /off or remove!
+// TODO: !) fix flex for book so x is top right 1) Remove a book 2) Wrap the bookshelf
 function Book(title, author, isRead) {
     this.title = title;
     this.author = author;
@@ -17,13 +17,17 @@ const Book1 = new Book("Egg's Title", "Kayla Shtink Bae", "Read");
 bookList.push(Book1);
 Book1.info();
 
-function displayBooks(bookList) {
-    bookList.forEach(Book_Obj => {
+function displayBooks(inputBooks) {
+    inputBooks.forEach(Book_Obj => {
 
         //Book Object
         const new_div = document.createElement("div");
         new_div.classList.add('book'); // when creating the new div make sure to set its class as a book
-
+        
+        const remove_button = document.createElement("button");
+        remove_button.classList.add('book_remove')
+        remove_button.textContent = "X";
+        new_div.appendChild(remove_button)
 
         //Book details construction. can we clean this up?
         let new_div_metadata = document.createElement("p");
@@ -39,6 +43,8 @@ function displayBooks(bookList) {
             new_div_metadata.textContent = "Not Read"
         }
         new_div.appendChild(new_div_metadata)
+
+        
         
 
         //Now add the new book back to the dom
@@ -47,7 +53,7 @@ function displayBooks(bookList) {
         // document.getElementById('book-title').innerHTML = Book_Obj.title;
         // document.getElementById('book-author').innerHTML = Book_Obj.author;
         // document.getElementById('book-read').innerHTML = Book_Obj.isRead; bad practice
-        bookList.pop(Book_Obj)
+        inputBooks.pop(Book_Obj)
     })
 }
 
