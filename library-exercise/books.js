@@ -1,7 +1,7 @@
 //Currently working on the book example on https://www.theodinproject.com/lessons/node-path-javascript-objects-and-object-constructors
 // Next step is the first project, and also installing node to run the code locally
 
-// TODO: !) fix flex for book so x is top right 1) Remove a book 2) Wrap the bookshelf
+// TODO:  1) refresh form on submit time  2) Wrap the bookshelf
 function Book(title, author, isRead) {
     this.title = title;
     this.author = author;
@@ -15,11 +15,28 @@ const bookList = []
 const Book1 = new Book("Egg's Title", "Kayla Shtink Bae", "Read");
  
 bookList.push(Book1);
-Book1.info();
 
+
+function removeBookBad(title, inputBooks) { /* BAD because it's inefficient, use */
+    inputBooks.forEach((book, index) => {
+        if (book.title === title) {
+            inputBooks.pop(book)
+        }
+        displayBooks(inputBooks)
+    });
+}
+
+function removeBook(target, inputBooks) {
+    target_book = target.parentNode;
+    list_of_books = Array.from(target_book.parentNode.children) // traverses the DOM
+    index_of_target = list_of_books.indexOf(target_book)
+    inputBooks.splice(index_of_target, 1)
+}
 function displayBooks(inputBooks) {
-    inputBooks.forEach(Book_Obj => {
+    current_books = document.getElementById('bookshelf')
+    current_books.innerHTML = ""
 
+    inputBooks.forEach(Book_Obj => {
         //Book Object
         const new_div = document.createElement("div");
         new_div.classList.add('book'); // when creating the new div make sure to set its class as a book
@@ -27,7 +44,13 @@ function displayBooks(inputBooks) {
         const remove_button = document.createElement("button");
         remove_button.classList.add('book_remove')
         remove_button.textContent = "X";
-        new_div.appendChild(remove_button)
+        remove_button.addEventListener("click", function (event) {
+            event.preventDefault();
+            removeBook(event.target, inputBooks);
+            displayBooks(inputBooks)
+            // removeBookBad(Book_Obj.title, inputBooks);
+        })
+        new_div.appendChild(remove_button);
 
         //Book details construction. can we clean this up?
         let new_div_metadata = document.createElement("p");
@@ -44,16 +67,10 @@ function displayBooks(inputBooks) {
         }
         new_div.appendChild(new_div_metadata)
 
-        
-        
-
         //Now add the new book back to the dom
         const book_list = document.getElementById("bookshelf");
         book_list.appendChild(new_div);
-        // document.getElementById('book-title').innerHTML = Book_Obj.title;
-        // document.getElementById('book-author').innerHTML = Book_Obj.author;
-        // document.getElementById('book-read').innerHTML = Book_Obj.isRead; bad practice
-        inputBooks.pop(Book_Obj)
+
     })
 }
 
@@ -74,8 +91,13 @@ new_form.addEventListener("click", function (event) {
     const new_title = document.getElementById('book_title_input').value;
     const new_author = document.getElementById('book_author_input').value;
     const new_read = document.getElementById('book_read_input').value;
+    console.log("before", bookList)
 
     addBook(new_title, new_author, new_read)
+    console.log(bookList)
     displayBooks(bookList)
+    console.log("after", bookList)
 })
+
+const remove_trigger = document.get
 
